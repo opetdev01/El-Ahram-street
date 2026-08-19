@@ -622,7 +622,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const MOVIE_STREAM_URL = 'https://drive.google.com/file/d/162xKwEBB-Bvl-pmJMjgfTRfzD3QHxsMA/preview';
 
   function openMovieModal() {
-    if (movieIframe && !movieIframe.src) {
+    if (movieIframe && (!movieIframe.src || movieIframe.src === 'about:blank' || movieIframe.src.endsWith('/'))) {
       movieIframe.src = MOVIE_STREAM_URL;
     }
     movieModal?.classList.add('open');
@@ -632,8 +632,9 @@ document.addEventListener('DOMContentLoaded', () => {
   function closeMovieModal() {
     movieModal?.classList.remove('open');
     movieModal?.setAttribute('aria-hidden', 'true');
+    // Stop video playback by resetting the iframe source
     if (movieIframe) {
-      movieIframe.src = ''; // Stops audio and video immediately
+      movieIframe.src = MOVIE_STREAM_URL;
     }
   }
 
