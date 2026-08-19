@@ -613,9 +613,46 @@ document.addEventListener('DOMContentLoaded', () => {
   lightboxCloseBtn.addEventListener('click', closeLightbox);
   lightboxBackdrop.addEventListener('click', closeLightbox);
 
+  // 12. MINIMALIST CINEMATIC MOVIE MODAL
+  const movieModalBtn = document.getElementById('movie-modal-btn');
+  const movieModal = document.getElementById('movie-modal');
+  const movieBackdrop = document.getElementById('movie-backdrop');
+  const movieCloseBtn = document.getElementById('movie-close-btn');
+  const movieIframe = document.getElementById('movie-iframe');
+  const MOVIE_STREAM_URL = 'https://drive.google.com/file/d/162xKwEBB-Bvl-pmJMjgfTRfzD3QHxsMA/preview';
+
+  function openMovieModal() {
+    if (movieIframe && (!movieIframe.src || movieIframe.src === 'about:blank' || movieIframe.src.endsWith('/'))) {
+      movieIframe.src = MOVIE_STREAM_URL;
+    }
+    movieModal?.classList.add('open');
+    movieModal?.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeMovieModal() {
+    movieModal?.classList.remove('open');
+    movieModal?.setAttribute('aria-hidden', 'true');
+    // Stop playback by resetting iframe
+    if (movieIframe) {
+      movieIframe.src = MOVIE_STREAM_URL;
+    }
+  }
+
+  movieModalBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    openMovieModal();
+  });
+  movieCloseBtn?.addEventListener('click', closeMovieModal);
+  movieBackdrop?.addEventListener('click', closeMovieModal);
+
   // Global Keyboard Navigation
   window.addEventListener('keydown', (e) => {
-    if (galleryModal.classList.contains('open')) {
+    if (movieModal?.classList.contains('open')) {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeMovieModal();
+      }
+    } else if (galleryModal.classList.contains('open')) {
       if (e.key === 'ArrowLeft') {
         e.preventDefault();
         showLightboxImage(currentLightboxIndex - 1);
@@ -640,6 +677,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('top-center-hud-group'),
     document.getElementById('journey-hud'),
     document.getElementById('weather-time-pill'),
+    document.getElementById('movie-modal-btn'),
+    document.getElementById('movie-modal'),
     document.getElementById('journey-mood-btn'),
     document.getElementById('welcome-overlay'),
     document.getElementById('gallery-modal')
