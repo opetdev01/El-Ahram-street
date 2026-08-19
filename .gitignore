@@ -13,6 +13,7 @@ create_night_web_image.py
 create_zone_images.py
 download_zone_ai_images.py
 
-# Ignore old oversized raw uncompressed files (>100MB)
+# Ignore old oversized uncompressed files
 assets/magnific_image-upscaler-21_xSwP249jfW.png
 assets/8k_1024.png
+assets/final intro al ahram.mp4

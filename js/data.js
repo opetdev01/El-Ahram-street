@@ -1,10 +1,11 @@
 /**
  * MASTERPLAN DATA: 8K DAY & NIGHT BASEMAPS + DUAL CALIBRATED COORDINATES & GALLERIES
+ * Optimized WebP 8K Basemaps & High-Speed Media Assets
  */
 
 const MASTERPLAN_CONFIG = {
-  dayImageUrl: 'assets/8K.png',
-  nightImageUrl: 'assets/night_8k.png',
+  dayImageUrl: 'assets/8K.webp',
+  nightImageUrl: 'assets/night_8k.webp',
   width: 5504,
   height: 3072
 };
@@ -43,15 +44,15 @@ const PINS_DATA = [
     status: 'Unlocked',
     description: 'A celebration of cultural identity, monumental architectural heritage, and historical storytelling welcoming visitors to El Ahram Street.',
     gallery: [
-      'assets/CULTURE ZONE/03.png',
-      'assets/CULTURE ZONE/04.png',
-      'assets/CULTURE ZONE/05.png',
-      'assets/CULTURE ZONE/08.png',
-      'assets/CULTURE ZONE/09.png',
-      'assets/CULTURE ZONE/10.png',
-      'assets/CULTURE ZONE/11.png',
-      'assets/CULTURE ZONE/12.png',
-      'assets/CULTURE ZONE/13.png'
+      'assets/CULTURE ZONE/03.webp',
+      'assets/CULTURE ZONE/04.webp',
+      'assets/CULTURE ZONE/05.webp',
+      'assets/CULTURE ZONE/08.webp',
+      'assets/CULTURE ZONE/09.webp',
+      'assets/CULTURE ZONE/10.webp',
+      'assets/CULTURE ZONE/11.webp',
+      'assets/CULTURE ZONE/12.webp',
+      'assets/CULTURE ZONE/13.webp'
     ]
   },
   {
@@ -69,12 +70,12 @@ const PINS_DATA = [
     status: 'Active Zone',
     description: 'An intellectual and educational district featuring interactive public exhibits, monumental libraries, and innovation showcases.',
     gallery: [
-      'assets/KNOWLEDGE ZONE/01.png',
-      'assets/KNOWLEDGE ZONE/02.png',
-      'assets/KNOWLEDGE ZONE/03.png',
-      'assets/KNOWLEDGE ZONE/04.png',
-      'assets/KNOWLEDGE ZONE/05.png',
-      'assets/KNOWLEDGE ZONE/06.png'
+      'assets/KNOWLEDGE ZONE/01.webp',
+      'assets/KNOWLEDGE ZONE/02.webp',
+      'assets/KNOWLEDGE ZONE/03.webp',
+      'assets/KNOWLEDGE ZONE/04.webp',
+      'assets/KNOWLEDGE ZONE/05.webp',
+      'assets/KNOWLEDGE ZONE/06.webp'
     ]
   },
   {
@@ -92,12 +93,12 @@ const PINS_DATA = [
     status: 'Main Landmark',
     description: 'The monumental central plaza with kinetic water fountains, gathering spaces, open-air art installations, and social attractions.',
     gallery: [
-      'assets/Entertainment Division/magnific_use-the-original-architec_IfCVdPQtvE.png',
-      'assets/Entertainment Division/magnific_use-the-original-architec_aFHdI4PfSh.png',
-      'assets/Entertainment Division/magnific_use-the-original-architec_kslCHYr16B.png',
-      'assets/Entertainment Division/magnific_use-the-original-architec_lJObrpCgv9.png',
-      'assets/Entertainment Division/magnific_use-the-original-architec_s7Jq1pcl8e.png',
-      'assets/Entertainment Division/magnific_use-the-original-architec_yi3LUIvPW9.png'
+      'assets/Entertainment Division/magnific_use-the-original-architec_IfCVdPQtvE.webp',
+      'assets/Entertainment Division/magnific_use-the-original-architec_aFHdI4PfSh.webp',
+      'assets/Entertainment Division/magnific_use-the-original-architec_kslCHYr16B.webp',
+      'assets/Entertainment Division/magnific_use-the-original-architec_lJObrpCgv9.webp',
+      'assets/Entertainment Division/magnific_use-the-original-architec_s7Jq1pcl8e.webp',
+      'assets/Entertainment Division/magnific_use-the-original-architec_yi3LUIvPW9.webp'
     ]
   },
   {
@@ -115,10 +116,10 @@ const PINS_DATA = [
     status: 'Commercial Spine',
     description: 'A premium lifestyle boulevard offering boutique retail stores, shaded outdoor cafes, gourmet restaurants, and active street fronts.',
     gallery: [
-      'assets/Commercial Division/magnific_create-a-premium-humaneye_bxjhRLb5Y2.png',
-      'assets/Commercial Division/magnific_create-a-premium-humaneye_s7JHZfil8e.png',
-      'assets/Commercial Division/magnific_use-the-original-architec_jUwFelJLD0.png',
-      'assets/Commercial Division/magnific_use-the-original-architec_u5K8Gq8QLD.png'
+      'assets/Commercial Division/magnific_create-a-premium-humaneye_bxjhRLb5Y2.webp',
+      'assets/Commercial Division/magnific_create-a-premium-humaneye_s7JHZfil8e.webp',
+      'assets/Commercial Division/magnific_use-the-original-architec_jUwFelJLD0.webp',
+      'assets/Commercial Division/magnific_use-the-original-architec_u5K8Gq8QLD.webp'
     ]
   },
   {
@@ -136,20 +137,20 @@ const PINS_DATA = [
     status: 'Grand Stage',
     description: 'The monumental civic plaza and amphitheater in front of the Grand Dome designed for grand spectacles, theatrical shows, and civic ceremonies.',
     gallery: [
-      'assets/Performance Division/Fav 02.png',
-      'assets/Performance Division/magnific_create-a-dynamic-premium-_eItGvIrdqL.png',
-      'assets/Performance Division/magnific_create-a-highend-humaneye_mEuVHHVhJQ.png',
-      'assets/Performance Division/magnific_create-a-highly-atmospher_gOyHNMASXO.png',
-      'assets/Performance Division/magnific_create-a-premium-cinemati_gOyq93FSXO.png',
-      'assets/Performance Division/magnific_create-a-premium-humaneye_Do8Zha5pcl.png',
-      'assets/Performance Division/magnific_create-a-premium-humaneye_jUwuO6vLD0.png',
-      'assets/Performance Division/magnific_create-a-premium-humaneye_nVM4epvYQD.png',
-      'assets/Performance Division/magnific_create-a-premium-humaneye_s7JQPaAl8e.png',
-      'assets/Performance Division/magnific_create-a-premium-photorea_dtmGfIrXSL.png',
-      'assets/Performance Division/magnific_create-a-premium-photorea_mEuTqNHhJQ.png',
-      'assets/Performance Division/magnific_create-a-premium-photorea_ovaWE5z829.png',
-      'assets/Performance Division/magnific_create-a-premium-photorea_xSUEJOxjfW.png',
-      'assets/Performance Division/magnific_create-a-quiet-intimate-h_6AGgYY0iJO.png'
+      'assets/Performance Division/Fav 02.webp',
+      'assets/Performance Division/magnific_create-a-dynamic-premium-_eItGvIrdqL.webp',
+      'assets/Performance Division/magnific_create-a-highend-humaneye_mEuVHHVhJQ.webp',
+      'assets/Performance Division/magnific_create-a-highly-atmospher_gOyHNMASXO.webp',
+      'assets/Performance Division/magnific_create-a-premium-cinemati_gOyq93FSXO.webp',
+      'assets/Performance Division/magnific_create-a-premium-humaneye_Do8Zha5pcl.webp',
+      'assets/Performance Division/magnific_create-a-premium-humaneye_jUwuO6vLD0.webp',
+      'assets/Performance Division/magnific_create-a-premium-humaneye_nVM4epvYQD.webp',
+      'assets/Performance Division/magnific_create-a-premium-humaneye_s7JQPaAl8e.webp',
+      'assets/Performance Division/magnific_create-a-premium-photorea_dtmGfIrXSL.webp',
+      'assets/Performance Division/magnific_create-a-premium-photorea_mEuTqNHhJQ.webp',
+      'assets/Performance Division/magnific_create-a-premium-photorea_ovaWE5z829.webp',
+      'assets/Performance Division/magnific_create-a-premium-photorea_xSUEJOxjfW.webp',
+      'assets/Performance Division/magnific_create-a-quiet-intimate-h_6AGgYY0iJO.webp'
     ]
   }
 ];
