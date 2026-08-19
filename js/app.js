@@ -71,15 +71,16 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // =========================================================
-  // 2. INITIALIZE LEAFLET MAP
+  // 2. INITIALIZE LEAFLET MAP (LOCKED TO MASTERPLAN BOUNDS)
   // =========================================================
   const map = L.map('masterplan-map', {
     crs: L.CRS.Simple,
     attributionControl: false,
     zoomControl: false,
-    zoomSnap: 0.05,
-    zoomDelta: 0.25,
-    maxBoundsViscosity: 0.75,
+    zoomSnap: 0.01,
+    zoomDelta: 0.2,
+    maxBounds: bounds,
+    maxBoundsViscosity: 1.0, // 100% rigid lock - strictly prevents dragging into black background
     bounceAtLimits: false,
     inertia: true,
     inertiaDeceleration: 3000,
@@ -720,31 +721,45 @@ document.addEventListener('DOMContentLoaded', () => {
   fetchLiveWeather();
   setInterval(fetchLiveWeather, 10 * 60 * 1000);
 
-  // 13. 2-Stage Zoom Calibration
+  // 13. 2-Stage Zoom Calibration (Locked strictly to masterplan)
   function calculate2StageZoom() {
     map.invalidateSize();
     const size = map.getSize();
     if (size.x === 0 || size.y === 0) return;
 
+    // Strict cover scale: guarantees the masterplan always fills 100% of the viewport with 0 black gaps
     const scaleX = size.x / imgWidth;
     const scaleY = size.y / imgHeight;
     const coverScale = Math.max(scaleX, scaleY);
-    stage1Zoom = Math.log2(coverScale);
+    stage1Zoom = Math.log2(coverScale) + 0.01; // +0.01 margin eliminates any floating-point subpixel gap
 
     stage2Zoom = stage1Zoom + 1.25;
 
     map.setMinZoom(stage1Zoom);
-    map.setMaxZoom(stage2Zoom);
+    map.setMaxZoom(stage2Zoom + 0.75);
     map.setMaxBounds(bounds);
 
     if (map.getZoom() < stage1Zoom || !map._loaded) {
       map.setView(center, stage1Zoom, { animate: false });
+    } else {
+      map.panInsideBounds(bounds, { animate: false });
     }
   }
 
   calculate2StageZoom();
   setTimeout(calculate2StageZoom, 50);
   setTimeout(calculate2StageZoom, 200);
+
+  // Active Pan Clamping - prevents dragging past masterplan edges
+  map.on('drag', () => {
+    map.panInsideBounds(bounds, { animate: false });
+  });
+  map.on('zoomend', () => {
+    map.panInsideBounds(bounds, { animate: false });
+  });
+  map.on('moveend', () => {
+    map.panInsideBounds(bounds, { animate: false });
+  });
 
   map.on('dblclick', (e) => {
     const currentZoom = map.getZoom();
