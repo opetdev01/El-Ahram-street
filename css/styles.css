@@ -1350,6 +1350,34 @@ html, body, #masterplan-map {
   letter-spacing: 0.02em;
 }
 
+.movie-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.movie-external-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(250, 204, 21, 0.15);
+  border: 1px solid rgba(250, 204, 21, 0.4);
+  color: #fef08a;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+}
+
+.movie-external-btn:hover {
+  background: #facc15;
+  color: #0f172a;
+  box-shadow: 0 0 14px rgba(250, 204, 21, 0.6);
+  transform: translateY(-1px);
+}
+
 .movie-close-btn {
   width: 34px;
   height: 34px;
