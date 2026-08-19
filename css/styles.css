@@ -198,54 +198,6 @@ html, body, #masterplan-map {
 }
 
 /* =========================================================
-   BOTTOM-LEFT FLOATING BRAND LOGOS (TRANSPARENT / NO BG)
-   ========================================================= */
-.bottom-left-logos {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  background: transparent;
-  border: none;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  z-index: 3000;
-  user-select: none;
-  pointer-events: auto;
-  filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.85));
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.bottom-left-logos:hover {
-  transform: translateY(-2px) scale(1.03);
-}
-
-.brand-logo-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.brand-logo-img {
-  height: 42px;
-  max-width: 90px;
-  width: auto;
-  object-fit: contain;
-  display: block;
-}
-
-.brand-logo-img.opet-logo {
-  filter: brightness(0) invert(1) drop-shadow(0 2px 6px rgba(0,0,0,0.6));
-  opacity: 0.95;
-  transition: opacity 0.2s ease;
-}
-
-.brand-logo-img.opet-logo:hover {
-  opacity: 1;
-}
-
-/* =========================================================
    MINIMALIST WELCOME OVERLAY: "EXPLORE THE NEW AHRAM STREET"
    ========================================================= */
 .welcome-overlay {
@@ -1314,15 +1266,6 @@ html, body, #masterplan-map {
     line-height: 1.35;
     margin-bottom: 8px;
   }
-  .bottom-left-logos {
-    bottom: 12px;
-    left: 12px;
-    gap: 6px;
-  }
-  .brand-logo-img {
-    height: 32px;
-    max-width: 75px;
-  }
   .lightbox-container {
     width: 96vw;
     height: 94vh;
@@ -1364,16 +1307,6 @@ html, body, #masterplan-map {
   .pill-dot {
     width: 4px;
     height: 4px;
-  }
-
-  .bottom-left-logos {
-    bottom: 6px;
-    left: 6px;
-    gap: 6px;
-  }
-  .brand-logo-img {
-    height: 24px;
-    max-width: 60px;
   }
 
   .top-center-hud-group {

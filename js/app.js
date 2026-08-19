@@ -639,7 +639,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('top-center-hud-group'),
     document.getElementById('journey-hud'),
     document.getElementById('weather-time-pill'),
-    document.getElementById('bottom-left-logos'),
     document.getElementById('journey-mood-btn'),
     document.getElementById('welcome-overlay'),
     document.getElementById('gallery-modal')
