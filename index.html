@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>The New Ahram Street — Interactive Masterplan</title>
+  
+  <!-- Google Fonts: Bodoni Moda, Playfair Display, Cinzel, Plus Jakarta Sans, Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Cinzel:wght@500;600;700;800&family=Outfit:wght@600;700;800;900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- Fullscreen Map Canvas -->
+  <div id="masterplan-map" class="map-canvas"></div>
+
+  <!-- Cinematic Fullscreen Intro Video Overlay -->
+  <div id="intro-video-overlay" class="intro-video-overlay">
+    <video id="intro-video" class="intro-video" autoplay muted playsinline preload="auto">
+      <source src="assets/final intro al ahram.mp4" type="video/mp4" />
+    </video>
+    <button id="skip-intro-btn" class="skip-intro-btn" aria-label="Skip Intro">
+      <span>Skip Intro</span>
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="5 4 15 12 5 20 5 4"></polygon>
+        <line x1="19" y1="5" x2="19" y2="19"></line>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Top-Left Floating Weather & Time Pill -->
+  <div class="weather-time-pill" id="weather-time-pill">
+    <div class="pill-location">
+      <span class="pill-dot"></span>
+      <span class="location-name">EL AHRAM, CAIRO</span>
+    </div>
+    <div class="pill-divider"></div>
+    <div class="pill-weather" id="pill-weather">
+      <span class="weather-icon" id="weather-icon">☀️</span>
+      <span class="weather-temp" id="weather-temp">29°C</span>
+      <span class="weather-condition" id="weather-desc">Sunny</span>
+    </div>
+    <div class="pill-divider"></div>
+    <div class="pill-time" id="pill-time">
+      <span id="live-clock">05:30 PM</span>
+    </div>
+  </div>
+
+  <!-- Bottom-Left Floating Brand Logos (Equal Optical Height & No Background) -->
+  <div class="bottom-left-logos" id="bottom-left-logos">
+    <div class="brand-logo-wrap" title="Partner Logo">
+      <img src="assets/logos/brand_logo_tight.png" alt="Brand Logo" class="brand-logo-img" />
+    </div>
+    <div class="brand-logo-wrap" title="Opet">
+      <img src="assets/logos/opet_logo_tight.png" alt="Opet Logo" class="brand-logo-img opet-logo" />
+    </div>
+  </div>
+
+  <!-- Minimalist Welcome Overlay: "Explore The New Ahram Street" in Vanitas Font -->
+  <div id="welcome-overlay" class="welcome-overlay">
+    <div class="welcome-backdrop"></div>
+    <div class="welcome-content">
+      <h1 class="welcome-title font-vanitas">Explore The New Ahram Street</h1>
+      <button id="welcome-explore-btn" class="welcome-cta-btn">
+        <span>Start Journey</span>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Top Center HUD Group & Centered Mood Toggle Button Underneath -->
+  <div class="top-center-hud-group" id="top-center-hud-group">
+    <!-- Top Glass HUD: Journey Progress & Restart -->
+    <div class="journey-hud" id="journey-hud">
+      <div class="hud-left">
+        <span class="hud-step-badge" id="journey-step-badge">STEP 1 / 5</span>
+        <span class="hud-hint" id="journey-hint">Explore Zone 01 or click Pin 01 to advance</span>
+      </div>
+      <div class="hud-right">
+        <button class="hud-btn" id="journey-reset-btn" title="Restart interactive tour">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+            <path d="M3 3v5h5" />
+          </svg>
+          Restart
+        </button>
+      </div>
+    </div>
+
+    <!-- Night Mode Toggle Button: Centered in the middle directly under the HUD -->
+    <div class="hud-mood-wrapper">
+      <button class="hud-btn mood-toggle-btn" id="journey-mood-btn" title="Toggle Day / Night Mood">
+        <span class="mood-icon" id="mood-icon">🌙</span>
+        <span id="mood-text">Night Mode</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Interactive Pin Detail Drawer with Mini Gallery -->
+  <div id="pin-card" class="pin-card-drawer" aria-hidden="true">
+    <button class="pin-card-close" id="pin-card-close" aria-label="Close">✕</button>
+    
+    <div class="pin-card-header">
+      <span class="pin-card-tag" id="pin-tag">ZONE 01</span>
+      <h3 class="pin-card-title" id="pin-title">Station Title</h3>
+      <p class="pin-card-meta" id="pin-meta">Coordinates: [Y, X]</p>
+    </div>
+
+    <!-- Featured Cover Photo with Click-to-Expand -->
+    <div class="pin-card-image-wrap" id="pin-card-hero-wrap" title="Click to view full image">
+      <img id="pin-card-img" src="" alt="Zone Preview" />
+      <div class="hero-expand-badge">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+        </svg>
+        Fullscreen
+      </div>
+    </div>
+
+    <!-- Mini Thumbnail Ribbon -->
+    <div class="card-gallery-section">
+      <div class="gallery-section-header">
+        <span class="gallery-section-title">GALLERY RENDERS</span>
+        <span class="gallery-count-badge" id="card-gallery-count">0 Photos</span>
+      </div>
+      <div class="card-gallery-thumbnails" id="card-gallery-thumbs">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+
+    <div class="pin-card-body">
+      <p class="pin-card-desc" id="pin-desc">Description of this location will appear here...</p>
+      
+      <div class="pin-card-actions">
+        <button class="pin-action-btn primary" id="pin-open-gallery-btn">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21 15 16 10 5 21"/>
+          </svg>
+          View Full Gallery
+        </button>
+        <button class="pin-action-btn secondary" id="pin-focus-btn">Focus View</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fullscreen Cinematic Lightbox Modal (Concept 1) -->
+  <div id="gallery-modal" class="gallery-lightbox-modal" aria-hidden="true">
+    <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+    
+    <div class="lightbox-container">
+      <!-- Lightbox Header -->
+      <div class="lightbox-header">
+        <div class="lightbox-info">
+          <span class="lightbox-tag" id="lightbox-zone-tag">ZONE 01</span>
+          <h2 class="lightbox-title" id="lightbox-zone-title">Zone Name</h2>
+        </div>
+        <div class="lightbox-controls">
+          <span class="lightbox-counter" id="lightbox-counter">1 / 9</span>
+          <button class="lightbox-close-btn" id="lightbox-close-btn" aria-label="Close Gallery">✕</button>
+        </div>
+      </div>
+
+      <!-- Main Stage Viewport -->
+      <div class="lightbox-stage">
+        <button class="lightbox-nav-btn prev" id="lightbox-prev-btn" aria-label="Previous Photo">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+        </button>
+
+        <div class="lightbox-image-viewport" id="lightbox-image-viewport">
+          <div class="lightbox-spinner" id="lightbox-spinner"></div>
+          <img id="lightbox-main-image" src="" alt="Architectural Render" />
+        </div>
+
+        <button class="lightbox-nav-btn next" id="lightbox-next-btn" aria-label="Next Photo">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Bottom Thumbnail Ribbon -->
+      <div class="lightbox-bottom-bar">
+        <div class="lightbox-thumbnails-scroll" id="lightbox-thumbs-track">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Leaflet & App Scripts -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
