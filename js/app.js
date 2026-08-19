@@ -619,7 +619,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const movieBackdrop = document.getElementById('movie-backdrop');
   const movieCloseBtn = document.getElementById('movie-close-btn');
   const movieIframe = document.getElementById('movie-iframe');
-  const MOVIE_STREAM_URL = 'https://drive.google.com/file/d/162xKwEBB-Bvl-pmJMjgfTRfzD3QHxsMA/preview';
+  const MOVIE_STREAM_URL = 'https://drive.google.com/file/d/1SINHbgFaQlGc1QGX0aXXcME5KpqsnVEW/preview';
 
   function openMovieModal() {
     if (movieIframe && (!movieIframe.src || movieIframe.src === 'about:blank' || movieIframe.src.endsWith('/'))) {
